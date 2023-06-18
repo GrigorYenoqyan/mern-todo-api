@@ -9,7 +9,6 @@ const createProduct = async (req, res, next) => {
   const newProduct = new Product({
     name: req.body.name,
     price: req.body.price,
-
   });
 
   try {
@@ -47,7 +46,9 @@ const getProducts = async (req, res, next) => {
     return res.json({ message: error });
   }
 
-  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
+  res.json({
+    products: products.map((product) => product.toObject({ getters: true })),
+  });
 };
 
 const updateProduct = async (req, res, next) => {
