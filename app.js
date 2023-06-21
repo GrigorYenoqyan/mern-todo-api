@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const controllers = require("./mongo");
 const mongoose = require("mongoose");
-const productControllers = require("./controllers/products");
-const todoControllers = require("./controllers/todos");
+const todosRoutes = require("./routes/todos-routes");
+const productsRoutes = require("./routes/products-routes");
 
 const app = express();
 
@@ -20,27 +20,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// products
+app.use("/products", productsRoutes);
 
-app.post("/products", productControllers.createProduct);
-
-app.get("/products", productControllers.getProducts);
-
-app.patch("/products/:pid", productControllers.updateProduct);
-
-app.delete("/products/:pid", productControllers.deleteProduct);
-
-// todos
-
-app.post("/todos", todoControllers.createTodo);
-
-app.get("/todos", todoControllers.getTodos);
-
-app.patch("/todos/:id", todoControllers.updateTodo);
-
-app.delete("/todos/:id", todoControllers.deleteTodo);
-
-// app.listen(3000);
+app.use("/todos", todosRoutes);
 
 mongoose
   .connect(
