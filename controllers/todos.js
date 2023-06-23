@@ -1,10 +1,5 @@
 const Todo = require("../models/todo");
 
-// const MongoClient = require("mongodb").MongoClient;
-
-// const url =
-//   "mongodb+srv://grigor:YGJEQR41dHSN77y5@cluster0.zuo9uoe.mongodb.net/test?retryWrites=true&w=majority";
-
 const createTodo = async (req, res, next) => {
   const newTodo = new Todo({
     name: req.body.name,
@@ -13,31 +8,14 @@ const createTodo = async (req, res, next) => {
 
   try {
     await newTodo.save();
-    // const client = new MongoClient(url);
   } catch (error) {
     return next(error);
   }
 
-  //   client.close();
   res.status(201).json({ todo: newTodo });
 };
 
 const getTodos = async (req, res, next) => {
-  //   const client = new MongoClient(url);
-
-  //   let todos;
-
-  //   try {
-  //     await client.connect();
-  //     const db = client.db();
-  //     todos = await db.collection("todos").find().toArray();
-  //   } catch (error) {
-  //     return res.json({ message: error });
-  //   }
-
-  //   client.close();
-  //   res.json(todos);
-
   let todos;
 
   try {
@@ -82,13 +60,6 @@ const deleteTodo = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-
-  // console.log({todo})
-  //     try {
-  //         await todo.schema;
-  //     } catch(error) {
-  //         return next(error);
-  //     }
 
   res.status(200).json({ message: "Deleted" });
 };

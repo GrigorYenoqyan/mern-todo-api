@@ -1,11 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const controllers = require("./mongo");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const todosRoutes = require("./routes/todos-routes");
 const productsRoutes = require("./routes/products-routes");
+const graphqlRoutes = require("./graphql");
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -23,6 +27,8 @@ app.use((req, res, next) => {
 app.use("/products", productsRoutes);
 
 app.use("/todos", todosRoutes);
+
+app.use("/graphql", graphqlRoutes);
 
 mongoose
   .connect(

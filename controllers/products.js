@@ -1,10 +1,5 @@
 const Product = require("../models/product");
 
-const MongoClient = require("mongodb").MongoClient;
-
-const url =
-  "mongodb+srv://grigor:YGJEQR41dHSN77y5@cluster0.zuo9uoe.mongodb.net/test?retryWrites=true&w=majority";
-
 const createProduct = async (req, res, next) => {
   const newProduct = new Product({
     name: req.body.name,
@@ -13,31 +8,14 @@ const createProduct = async (req, res, next) => {
 
   try {
     await newProduct.save();
-    // const client = new MongoClient(url);
   } catch (error) {
     return next(error);
   }
 
-  //   client.close();
   res.status(201).json({ product: newProduct });
 };
 
 const getProducts = async (req, res, next) => {
-  //   const client = new MongoClient(url);
-
-  //   let products;
-
-  //   try {
-  //     await client.connect();
-  //     const db = client.db();
-  //     products = await db.collection("products").find().toArray();
-  //   } catch (error) {
-  //     return res.json({ message: error });
-  //   }
-
-  //   client.close();
-  //   res.json(products);
-
   let products;
 
   try {
@@ -82,13 +60,6 @@ const deleteProduct = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-
-  // console.log({product})
-  //     try {
-  //         await product.schema;
-  //     } catch(error) {
-  //         return next(error);
-  //     }
 
   res.status(200).json({ message: "Deleted" });
 };
