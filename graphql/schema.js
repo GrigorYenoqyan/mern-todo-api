@@ -7,6 +7,7 @@ const schema = buildSchema(`
   type Todo {
     name: String
     done: Boolean
+    id: ID
   }
 `);
 

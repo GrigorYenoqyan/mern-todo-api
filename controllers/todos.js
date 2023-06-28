@@ -61,7 +61,7 @@ const deleteTodo = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(200).json({ message: "Deleted" });
+  res.status(200).json({ message: "Deleted", id: todoId });
 };
 
 exports.createTodo = createTodo;
