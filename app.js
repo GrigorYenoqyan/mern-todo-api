@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const todosRoutes = require("./routes/todos-routes");
 const productsRoutes = require("./routes/products-routes");
+const usersRoutes = require("./routes/users-routes");
 const graphqlRoutes = require("./graphql");
 
 const app = express();
@@ -27,6 +28,8 @@ app.use((req, res, next) => {
 app.use("/products", productsRoutes);
 
 app.use("/todos", todosRoutes);
+
+app.use("/users", usersRoutes);
 
 app.use("/graphql", graphqlRoutes);
 
