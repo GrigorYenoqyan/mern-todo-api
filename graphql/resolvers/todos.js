@@ -1,7 +1,7 @@
 const Todo = require("../../models/todo");
 
 const resolvers = {
-  getTodos: async () => {
+  todos: async () => {
     try {
       const todos = await Todo.find();
       return todos;

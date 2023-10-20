@@ -2,7 +2,7 @@ const { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
   type Query {
-    getTodos: [Todo]
+    todos: [Todo]
   }
   type Todo {
     name: String
