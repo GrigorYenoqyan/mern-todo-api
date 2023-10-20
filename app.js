@@ -6,7 +6,16 @@ const cors = require("cors");
 const todosRoutes = require("./routes/todos-routes");
 const productsRoutes = require("./routes/products-routes");
 const usersRoutes = require("./routes/users-routes");
-const graphqlRoutes = require("./graphql");
+
+const { ApolloServer } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
+const typeDefs = require("./graphql/schema");
+const resolvers = require("./graphql/resolvers");
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
 const app = express();
 
@@ -31,11 +40,16 @@ app.use("/todos", todosRoutes);
 
 app.use("/users", usersRoutes);
 
-app.use("/graphql", graphqlRoutes);
+const port = process.env.PORT || 5000;
+const useGraphQL = process.env.USE_GRAPHQL === "true";
 
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zuo9uoe.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
-  .then(() => app.listen(process.env.PORT || 5000))
+  .then(() => {
+    useGraphQL
+      ? startStandaloneServer(server, { listen: { port } })
+      : app.listen(port);
+  })
   .catch((error) => console.log(error));

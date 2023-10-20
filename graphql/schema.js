@@ -1,15 +1,12 @@
-const { buildSchema } = require("graphql");
-
-const schema = buildSchema(`
-  type Query {
-    todos: [Todo]
-  }
+const typeDefs = `#graphql
   type Todo {
     name: String
     done: Boolean
     id: ID
   }
-`);
+  type Query {
+    todos: [Todo]
+  }
+`;
 
-
-module.exports = schema;
+module.exports = typeDefs;
