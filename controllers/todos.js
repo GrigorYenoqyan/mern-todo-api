@@ -53,10 +53,9 @@ const updateTodo = async (req, res, next) => {
 
 const deleteTodo = async (req, res, next) => {
   const todoId = req.params.id;
-  let todo;
 
   try {
-    todo = await Todo.findByIdAndRemove(todoId);
+    await Todo.findByIdAndRemove(todoId);
   } catch (error) {
     return next(error);
   }

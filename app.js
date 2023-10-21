@@ -13,6 +13,7 @@ const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 
 const server = new ApolloServer({
+  csrfPrevention: false,
   typeDefs,
   resolvers,
 });
